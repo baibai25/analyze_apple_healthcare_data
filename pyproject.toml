@@ -1,0 +1,88 @@
+[tool.poetry]
+name = "analyze-apple-healthcare-data"
+version = "0.1.0"
+description = ""
+authors = ["Kotaro Ambai <kamuy.camel.0225@gmail.com>"]
+readme = "README.md"
+packages = [{include = "analyze_apple_healthcare_data"}]
+
+[tool.poetry.dependencies]
+python = "^3.11.3"
+ipykernel = "^6.29.5"
+pandas = "^2.2.2"
+seaborn = "^0.13.2"
+numpy = "^2.0.1"
+
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.11.1"
+ruff = "^0.5.6"
+python-dotenv = "^1.0.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 119
+
+extend-include = ["*.ipynb"]
+
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+    "__pycache__",
+]
+
+lint.select = [
+    "E", # pycodestyle errors
+    "W", # pycodestyle warnings
+    "F", # pyflakes
+    "B", # flake8-bugbear
+    "I", # isort
+]
+
+lint.ignore = [
+    "E501", # line too long, handled by black
+    "B008", # do not perform function calls in argument defaults
+    "B024", # abstract class has no abstract methods
+]
+
+lint.unfixable = [
+    "F401", # module imported but unused
+    "F841", # local variable is assigned to but never used,
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["E402", "F401"]
+"**/{tests,docs,tools}/*" = ["E402"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.mypy]
+python_version = 3.10
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_untyped_calls = true
